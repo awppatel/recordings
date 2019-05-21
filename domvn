@@ -1,0 +1,5 @@
+#!/bin/bash
+#old_java=$JAVA_HOME
+#JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home"
+/usr/local/bin/mvn -e clean package
+#JAVA_HOME="$old_java"
