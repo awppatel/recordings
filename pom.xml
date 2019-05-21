@@ -26,10 +26,10 @@
 		</plugins>
 	</build>
 	<properties>
-		<jersey.version>2.18</jersey.version>
-		<jackson.version>2.9.6</jackson.version>
+		<jersey.version>2.28</jersey.version>
+		<jackson.version>2.9.8</jackson.version>
 		<!-- <cxf.version>2.2.3</cxf.version> -->
-		<cxf.version>3.1.0</cxf.version>
+		<cxf.version>3.3.2</cxf.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -147,7 +147,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3.3</version>
+			<version>4.5.8</version>
 		</dependency>
 
 		<dependency>
