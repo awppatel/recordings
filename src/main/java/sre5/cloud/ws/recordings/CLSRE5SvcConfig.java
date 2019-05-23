@@ -59,8 +59,8 @@ public class CLSRE5SvcConfig implements ServletContextListener
 //	private static final byte CDRL_IN_DID = 1;
 //	private static final byte CDRL_ALL_EXT = 2;
 //	public static final String cust_id="square2:";				// Will get this from config later
-	public static WSRDAuthsrednisResp callBridge = null;
-	public static WSRDAuthsrednisResp direct_dial = null;
+//	public static WSRDAuthsrednisResp callBridge = null;
+//	public static WSRDAuthsrednisResp direct_dial = null;
 	
 	// Create threads to download the Recorded file
 	public static final ExecutorService		executorService			= Executors
@@ -68,7 +68,7 @@ public class CLSRE5SvcConfig implements ServletContextListener
 
 	
 			
-	private String				sre5rec_ver			= "\nSRE-2018 Cloud Recordings Web Service Version 0.2 : 023 (2018-10-02)\n";
+	private static final String				sre5rec_ver			= "SoundRecall-2019 Cloud Recordings Web Service Version 2.0 : 003 (2019-05-23)";
 	/*
 	final Application application = new ResourceConfig()
     .packages("org.glassfish.jersey.examples.multipart")

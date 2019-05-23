@@ -91,19 +91,32 @@ public class WSCLAuthSreAniDnis
 				// Check the DB if the DNIS exists, is Active and get the JSON String to return
 				String dnis_json_info = new CLSre5Database().GetDnisJson(dnis_req.getSre18Dnis());
 				
-				// String new_dnis_resp = dnis_json_info.replace("{", "{ \"ani_to_send\" : \"" + ani_to_ret +"\",");
-				
-				//String dnis_resp = "{ \"ani_to_send\" : \"" + ani_to_ret +"\",\"dnis_info\" : "+dnis_json_info+"}";
-				log_buff.setLength(0);
-				log_buff.append(myclassname)
-					.append("Returning for DNIS:")
-					.append(dnis_req.getSre18Dnis())
-					.append("\nJSON Data: ")
-					.append((dnis_json_info == null ? "WHY NULL?" : dnis_json_info));
-				
 				log.info(log_buff.toString());
+				if(dnis_json_info == null)
+				{
+					log_buff.setLength(0);
+					log_buff.append(myclassname)
+						.append("Error DNIS:")
+						.append(dnis_req.getSre18Dnis())
+						.append(", NO JSON DATA");
+					MDC.remove("sessionId");
+					return(Response.status(405).entity("Server Error").build());
+				}
+				else
+				{
+					String new_dnis_resp = dnis_json_info.replace("{", "{ \"ani_to_send\" : \"" +dnis_req.getSre18Ani()  +"\",");
+					log_buff.setLength(0);
+					log_buff.append(myclassname)
+						.append("Returning for DNIS:")
+						.append(dnis_req.getSre18Dnis())
+						.append("\nJSON Data: ")
+						.append(new_dnis_resp);
+					
+					log.info(log_buff.toString());
+					MDC.remove("sessionId");
+					return(Response.status(200).entity(new_dnis_resp).build());
+				}
 				
-				return(Response.status(dnis_json_info== null ? 405 : 200).entity((dnis_json_info == null) ? "Server Error" : dnis_json_info).build());
 			}
 			catch (IOException e)
 			{
