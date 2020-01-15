@@ -5,4 +5,4 @@ if [ "$1" == "" ]; then
 	exit
 fi
 
-scp target/recordings.war sncloud01:recordings.war.$1
+scp target/recordings.war snmobile-2:recordings.war.$1

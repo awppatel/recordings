@@ -101,7 +101,7 @@ public class CLGetNxtGnRecordedFile implements Runnable
 		try
 		{
 			// First get the Specific for the REstcomm server
-			CFGDRecordingServer cur_server = CLSRE5SvcConfig.sre5_conf.sre5_config.getServerConfig(this.source_ip);
+			CFGDRecordingServer cur_server = CLSRE5SvcConfig.sre19_config.getServerConfig(this.source_ip);
 			final String rstcm_fname = cdr_data.getSre18_rec_file_public_url().substring(cdr_data.getSre18_rec_file_public_url().lastIndexOf("/")+1);
 			final String rstcm_file_name_url_str=cur_server.getSre18_recfileurl().replaceAll("IPADDRESS",this.source_ip)+"/"+ rstcm_fname;
 			final String rec_file_name = GenerateRecordedFileName(cur_server.getRecfilepath());	// Need this to send to the CDR record. Also this function creates the actual directory path

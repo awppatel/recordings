@@ -20,7 +20,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Jersey Web Application</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/sre5api/*</url-pattern>
     </servlet-mapping>
     	<listener>
 		<listener-class>sre5.cloud.ws.recordings.CLSRE5SvcConfig</listener-class>

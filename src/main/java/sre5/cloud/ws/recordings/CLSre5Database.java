@@ -25,7 +25,7 @@ import sre2018.cloud.apis.WSQDSre18CdrData;
 public class CLSre5Database
 {
 	private static final Logger log = LoggerFactory.getLogger(CLSre5Database.class);
-	private static final CFGDSre5Config rec_config = CLSRE5SvcConfig.sre5_conf.sre5_config;
+	private static final CFGDSre5Config rec_config = CLSRE5SvcConfig.sre19_config;
 	
 	Connection sre5_db_conn = null;
 	
@@ -120,7 +120,7 @@ public class CLSre5Database
 			update_cdr_stmt.setString(2, cdr_data.FormatDBFileName());
 			update_cdr_stmt.setString(3, cdr_data.getRecHash());
 			update_cdr_stmt.setString(4, cdr_data.getRecID());
-			update_cdr_stmt.setInt(5, rec_config.getGmt_offset());
+			update_cdr_stmt.setInt(5, rec_config.getGeneric_data().getGmt_offset());
 			
 			log.debug("UpdateCDR:Query:" + update_cdr_stmt.toString()+"\n");
 
@@ -434,7 +434,7 @@ public class CLSre5Database
 			insert_cdr_stmt.setString(7, cdr_data.getDnis());
 			insert_cdr_stmt.setString(8, cdr_data.getExtensionNum());
 			insert_cdr_stmt.setString(9, cdr_data.getRecID());
-			insert_cdr_stmt.setInt(10, rec_config.getGmt_offset());
+			insert_cdr_stmt.setInt(10, rec_config.getGeneric_data().getGmt_offset());
 			insert_cdr_stmt.setInt(11, cdr_logic);
 
 

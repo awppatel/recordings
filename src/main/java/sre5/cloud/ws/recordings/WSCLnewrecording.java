@@ -62,7 +62,7 @@ public class WSCLnewrecording
 	int							resp_code;
 	private static final Logger	log	= LoggerFactory
 											.getLogger(WSCLnewrecording.class);
-	private static final CFGDSre5Config rec_config = CLSRE5SvcConfig.sre5_conf.sre5_config;
+	private static final CFGDSre5Config rec_config = CLSRE5SvcConfig.sre19_config;
 	private WSQDRecordingMetaData rec_metadata;
 
 	@GET
@@ -88,7 +88,7 @@ public class WSCLnewrecording
 
 	{
 		String session_id = UUID.randomUUID().toString();
-		MDC.put("sessionId", rec_config.getLogname() + session_id);
+		MDC.put("sessionId", session_id);
 
 		if(recMetaData == null)
 		{
@@ -103,7 +103,7 @@ public class WSCLnewrecording
 			log.info(bytesToString(recMetaData) + "\n");
 		}
 
-		if(rec_config.Is_dual_record())
+		if(rec_config.getGeneric_data().isDual_record())
 		{
 			// DoDualRecord will fill the appropriate resp_code and resp_str to send back
 			DoDualRecord(req,file_size,uploadedInputStream,fileDetail,recMetaData);
@@ -202,6 +202,7 @@ public class WSCLnewrecording
 			{
 				case 0 :		// All was fine, need to upload the file
 					long rec_file_len = UploadRecordedFile(_uploadedInputStream,_fileDetail);
+					/* Jan 14, 2020. We absorb all records even if the lenght is 0
 					if(rec_file_len <= 0)		// Error Uploading the file??
 					{
 						resp_code = 405;
@@ -210,8 +211,9 @@ public class WSCLnewrecording
 						sre5_dbase.SetFileError(rec_metadata.getRecID());
 					}
 					else
+					*/
 					{
-						sre5_dbase.SetFileDuration(rec_metadata.getRecID(),rec_file_len);
+						sre5_dbase.SetFileDuration(rec_metadata.getRecID(),rec_file_len > 0L ? rec_file_len : 0L);
 					}
 					break;
 
@@ -286,7 +288,7 @@ public class WSCLnewrecording
 	{
 		// Need to convert the GMT Time to the local time since the Portal will save the time as local time and look for file in that directory
 		CLSre5Database sre5db = new CLSre5Database();
-		String fileLocation = rec_config.getRecfilepath() + "/" + sre5db.GetRecFileDir(rec_metadata.getRecID(),rec_metadata.getStoc());
+		String fileLocation = rec_config.getGeneric_data().getRecfilepath() + "/" + sre5db.GetRecFileDir(rec_metadata.getRecID(),rec_metadata.getStoc());
 		//rec_metadata.getStoc().substring(0, 4) + "/" + rec_metadata.getStoc().substring(4, 6);
 		
 		// Check if the location directory exists. If not create it.
